@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
 
         that.apiService.postNoHeader('login', params).subscribe(res => {
           console.log(res);
-          localStorage.setItem(LOCALSTORE_KEY.ACCOUNT, JSON.stringify(res.data));
+          sessionStorage.setItem(LOCALSTORE_KEY.ACCOUNT, JSON.stringify(res.data));
           that.helperService.showNotification(NOTIFICATION_PLACES.BOTTOM, NOTIFICATION_PLACES.RIGHT, res.status, res.message);
           that.helperService.hideLoading();
         });

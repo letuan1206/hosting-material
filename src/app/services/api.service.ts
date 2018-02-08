@@ -21,7 +21,6 @@ export class ApiService {
     const apiUrl = this.apiBase + url;
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers, withCredentials: true });
-    // params.environment = this.configService.get('environment');
     return this.http.post(apiUrl, params, options)
       .map(res => res.json());
   }
@@ -38,7 +37,6 @@ export class ApiService {
     const apiUrl = this.apiBase + url;
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers, withCredentials: true });
-    // params.environment = this.configService.get('environment');
     return this.http.get(apiUrl, options)
       .map(res => res.json());
   }
