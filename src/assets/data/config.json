@@ -1,0 +1,7 @@
+{
+    "apiBase": "http://tuanle.ddns.net/project-muonline/server-api/public/",
+    "status": {
+        "success": "ok",
+        "error": "error"
+    }
+}

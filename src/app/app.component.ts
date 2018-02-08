@@ -1,3 +1,4 @@
+import { HelperService } from './services/helper.service';
 import { Component, OnInit } from '@angular/core';
 
 declare var $: any;
@@ -8,8 +9,13 @@ declare var $: any;
 })
 
 export class AppComponent implements OnInit {
+    public loading = false;
 
-    constructor() {}
+    constructor(private helperService: HelperService) {
+        this.helperService.loading.subscribe(res => {
+            this.loading = res || false;
+        });
+    }
 
     ngOnInit() {
         $.material.init();

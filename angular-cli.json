@@ -19,12 +19,12 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-          "../node_modules/bootstrap/dist/css/bootstrap.css",
-          "../node_modules/sweetalert2/dist/sweetalert2.css",
-          "../node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
-          "./assets/sass/material-dashboard.scss",
-          "../node_modules/angular-calendar/scss/angular-calendar.scss",
-          "./assets/css/demo.css"
+        "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../node_modules/sweetalert2/dist/sweetalert2.css",
+        "../node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
+        "./assets/sass/material-dashboard.scss",
+        "../node_modules/angular-calendar/scss/angular-calendar.scss",
+        "./assets/css/demo.css"
       ],
       "scripts": [
         "../node_modules/hammerjs/hammer.min.js",
@@ -84,6 +84,9 @@
     }
   },
   "defaults": {
+    "serve": {
+      "port": 3000
+    },
     "styleExt": "scss",
     "component": {}
   }
