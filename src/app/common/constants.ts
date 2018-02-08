@@ -9,3 +9,8 @@ export const NOTIFICATION_PLACES: any = {
     LEFT: 'left',
     RIGHT: 'right'
 }
+
+export const RESPONSE_STATUS: any = {
+    SUCCESS: 1,
+    ERROR: 0
+}

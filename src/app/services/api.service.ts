@@ -41,7 +41,11 @@ export class ApiService {
       .map(res => res.json());
   }
 
-  getBankInfo() {
-
+  getBankInfo(account): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.get(`bank/getBankInfo?account=${account}`).subscribe(res => {
+        resolve(res.results);
+      }, reject);
+    });
   }
 }
