@@ -48,6 +48,9 @@ import { SidebarModule } from './sidebar/sidebar.module';
 import { FooterModule } from './shared/footer/footer.module';
 import { NavbarModule } from './shared/navbar/navbar.module';
 import { LoadingModule } from 'ngx-loading';
+import { AccordionModule } from 'primeng/accordion';     //accordion and accordion tab
+import { MenuItem } from 'primeng/api';                 //api
+
 import { FixedpluginModule } from './shared/fixedplugin/fixedplugin.module';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';

@@ -17,7 +17,7 @@ export class ApiService {
     this.apiBase = this.configService.get('apiBase');
   }
 
-  post(url, params): Observable<any> {
+  postNoHeader(url, params): Observable<any> {
     const apiUrl = this.apiBase + url;
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers, withCredentials: true });
@@ -26,5 +26,24 @@ export class ApiService {
       .map(res => res.json());
   }
 
-  
+  post(url, params): Observable<any> {
+    const apiUrl = this.apiBase + url;
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers, withCredentials: true });
+    return this.http.post(apiUrl, params, options)
+      .map(res => res.json());
+  }
+
+  get(url): Observable<any> {
+    const apiUrl = this.apiBase + url;
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers, withCredentials: true });
+    // params.environment = this.configService.get('environment');
+    return this.http.get(apiUrl, options)
+      .map(res => res.json());
+  }
+
+  getBankInfo() {
+
+  }
 }
