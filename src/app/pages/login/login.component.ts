@@ -1,3 +1,6 @@
+import { Router } from '@angular/router';
+import { Character } from './../../interfaces/model';
+import { RESPONSE_STATUS } from './../../common/constants';
 import { HelperService } from './../../services/helper.service';
 import { ApiService } from './../../services/api.service';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
@@ -22,7 +25,8 @@ export class LoginComponent implements OnInit {
     private element: ElementRef,
     private fb: FormBuilder,
     private apiService: ApiService,
-    private helperService: HelperService
+    private helperService: HelperService,
+    private router: Router,
   ) {
     this.nativeElement = element.nativeElement;
     this.sidebarVisible = false;
@@ -60,9 +64,28 @@ export class LoginComponent implements OnInit {
 
         that.apiService.postNoHeader('login', params).subscribe(res => {
           console.log(res);
-          sessionStorage.setItem(LOCALSTORE_KEY.ACCOUNT, JSON.stringify(res.data));
-          that.helperService.showNotification(NOTIFICATION_PLACES.BOTTOM, NOTIFICATION_PLACES.RIGHT, res.status, res.message);
-          that.helperService.hideLoading();
+          if (res.status === RESPONSE_STATUS.SUCCESS) {
+            sessionStorage.setItem(LOCALSTORE_KEY.ACCOUNT, JSON.stringify(res.data));
+
+            new Promise((resolve, reject) => {
+              Promise.all([
+                that.apiService.getBankInfo(res.data.memb___id),
+                that.apiService.getInfoCharacter(res.data.memb___id)
+              ]).then(
+                ([bankInfo, charInfo]) => {
+                  console.log(bankInfo);
+                  let chars: Character[];
+                  chars = charInfo.data;
+
+                  console.log(chars);
+                  that.router.navigate(['/dashboard']);
+                  that.helperService.hideLoading();
+                });
+            });
+          } else {
+            that.helperService.hideLoading();
+          }
+          // that.helperService.showNotification(NOTIFICATION_PLACES.BOTTOM, NOTIFICATION_PLACES.RIGHT, res.status, res.message);
         });
       });
     } else {

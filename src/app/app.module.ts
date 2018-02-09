@@ -1,3 +1,4 @@
+import { AuthGuard } from './shared/auth-guard.service';
 import { HelperService } from './services/helper.service';
 import { ApiService } from './services/api.service';
 import { ConfigService } from './services/config.service';
@@ -56,6 +57,8 @@ import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 
 import { AppRoutes } from './app.routing';
+import { NgRedux, NgReduxModule } from 'ng2-redux';
+import { IAppState, rootReducer, INITIAL_STATE } from './store';
 
 @NgModule({
   exports: [
@@ -107,7 +110,8 @@ export class MaterialModule { }
     NavbarModule,
     FooterModule,
     FixedpluginModule,
-    LoadingModule
+    LoadingModule,
+    NgReduxModule
   ],
   declarations: [
     AppComponent,
@@ -121,6 +125,7 @@ export class MaterialModule { }
     ConfigService,
     ApiService,
     HelperService,
+    AuthGuard,
   {
     provide: APP_INITIALIZER,
     useFactory: appConfigFactory,
@@ -130,7 +135,12 @@ export class MaterialModule { }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule {
+  constructor(ngRedux: NgRedux<IAppState>) {
+    ngRedux.configureStore(rootReducer, INITIAL_STATE);
+  }
+}
 
 export function appConfigFactory(config: ConfigService) {
   return () => config.load();

@@ -1,3 +1,4 @@
+import { AuthGuard } from './shared/auth-guard.service';
 import { Routes } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
@@ -10,6 +11,7 @@ export const AppRoutes: Routes = [
     pathMatch: 'full',
   }, {
     path: '',
+    canActivate: [AuthGuard],
     component: AdminLayoutComponent,
     children: [
       {
